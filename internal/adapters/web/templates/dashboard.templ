@@ -1,0 +1,73 @@
+package templates
+
+import "github.com/javaBin/talks-indexer/internal/domain"
+
+templ Dashboard(conferences []domain.Conference) {
+	@Layout("Talks Indexer Admin") {
+		<h1>Talks Indexer Admin</h1>
+
+		<div class="section">
+			<h2>Reindex All Conferences</h2>
+			<p>Reindex all talks from all conferences. This will recreate both indexes.</p>
+			<button
+				hx-post="/admin/reindex/all"
+				hx-target="#result-all"
+				hx-indicator="#loading-all"
+				hx-disabled-elt="this"
+			>
+				Reindex All
+			</button>
+			<div id="loading-all" class="htmx-indicator">
+				<div class="result loading">Reindexing all conferences...</div>
+			</div>
+			<div id="result-all"></div>
+		</div>
+
+		<div class="section">
+			<h2>Reindex Single Conference</h2>
+			<p>Select a conference to reindex only its talks.</p>
+			<div class="form-group">
+				<select name="slug" id="conference-select">
+					<option value="">Select a conference...</option>
+					for _, conf := range conferences {
+						<option value={ conf.Slug }>{ conf.Name }</option>
+					}
+				</select>
+				<button
+					hx-post="/admin/reindex/conference"
+					hx-include="#conference-select"
+					hx-target="#result-conference"
+					hx-indicator="#loading-conference"
+					hx-disabled-elt="this"
+				>
+					Reindex Conference
+				</button>
+			</div>
+			<div id="loading-conference" class="htmx-indicator">
+				<div class="result loading">Reindexing conference...</div>
+			</div>
+			<div id="result-conference"></div>
+		</div>
+
+		<div class="section">
+			<h2>Reindex Single Talk</h2>
+			<p>Enter a talk ID to reindex that specific talk.</p>
+			<div class="form-group">
+				<input type="text" name="talkId" id="talk-id" placeholder="Enter talk ID..."/>
+				<button
+					hx-post="/admin/reindex/talk"
+					hx-include="#talk-id"
+					hx-target="#result-talk"
+					hx-indicator="#loading-talk"
+					hx-disabled-elt="this"
+				>
+					Reindex Talk
+				</button>
+			</div>
+			<div id="loading-talk" class="htmx-indicator">
+				<div class="result loading">Reindexing talk...</div>
+			</div>
+			<div id="result-talk"></div>
+		</div>
+	}
+}
