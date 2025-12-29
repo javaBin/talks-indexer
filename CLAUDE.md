@@ -50,6 +50,8 @@ This project uses clean hexagonal architecture:
 | `MORESLEEP_USER` | Username for moresleep authentication | (empty) |
 | `MORESLEEP_PASSWORD` | Password for moresleep authentication | (empty) |
 | `ELASTICSEARCH_URL` | Elasticsearch URL | `http://localhost:9200` |
+| `ELASTICSEARCH_USER` | Username for Elasticsearch authentication | (empty) |
+| `ELASTICSEARCH_PASSWORD` | Password for Elasticsearch authentication | (empty) |
 | `PRIVATE_INDEX` | Name of private index | `javazone_private` |
 | `PUBLIC_INDEX` | Name of public index | `javazone_public` |
 | `OIDC_ISSUER_URL` | OIDC provider issuer URL (production only) | (empty) |

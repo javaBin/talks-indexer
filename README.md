@@ -65,6 +65,8 @@ Configuration is done via environment variables:
 | `MORESLEEP_USER` | Username for moresleep auth (optional) | - |
 | `MORESLEEP_PASSWORD` | Password for moresleep auth (optional) | - |
 | `ELASTICSEARCH_URL` | Elasticsearch URL | `http://localhost:9200` |
+| `ELASTICSEARCH_USER` | Username for Elasticsearch auth (optional) | - |
+| `ELASTICSEARCH_PASSWORD` | Password for Elasticsearch auth (optional) | - |
 | `PRIVATE_INDEX` | Name of private index | `javazone_private` |
 | `PUBLIC_INDEX` | Name of public index | `javazone_public` |
 | `OIDC_ISSUER_URL` | OIDC provider issuer URL | - |

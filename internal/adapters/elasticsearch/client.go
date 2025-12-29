@@ -23,9 +23,16 @@ type Client struct {
 
 // New creates a new Elasticsearch client.
 // The elasticsearchURL parameter should be the full URL to the Elasticsearch cluster (e.g., "http://localhost:9200").
-func New(elasticsearchURL string) (*Client, error) {
+// Username and password are optional - pass empty strings for unauthenticated connections.
+func New(elasticsearchURL, username, password string) (*Client, error) {
 	cfg := elasticsearch.Config{
 		Addresses: []string{elasticsearchURL},
+	}
+
+	// Add authentication if credentials are provided
+	if username != "" && password != "" {
+		cfg.Username = username
+		cfg.Password = password
 	}
 
 	es, err := elasticsearch.NewClient(cfg)
@@ -46,7 +53,7 @@ func New(elasticsearchURL string) (*Client, error) {
 	}
 
 	logger := slog.Default().With("component", "elasticsearch")
-	logger.Info("connected to elasticsearch", "url", elasticsearchURL)
+	logger.Info("connected to elasticsearch", "url", elasticsearchURL, "authenticated", username != "")
 
 	return &Client{
 		es:     es,

@@ -29,14 +29,16 @@ func (m Mode) IsDevelopment() bool {
 
 // Config holds all application configuration loaded from environment variables
 type Config struct {
-	Mode              Mode   `env:"MODE" envDefault:"production"`
-	Port              int    `env:"PORT" envDefault:"8080"`
-	MoresleepURL      string `env:"MORESLEEP_URL" envDefault:"http://localhost:8082"`
-	MoresleepUser     string `env:"MORESLEEP_USER"`
-	MoresleepPassword string `env:"MORESLEEP_PASSWORD"`
-	ElasticsearchURL  string `env:"ELASTICSEARCH_URL" envDefault:"http://localhost:9200"`
-	PrivateIndex      string `env:"PRIVATE_INDEX" envDefault:"javazone_private"`
-	PublicIndex       string `env:"PUBLIC_INDEX" envDefault:"javazone_public"`
+	Mode                  Mode   `env:"MODE" envDefault:"production"`
+	Port                  int    `env:"PORT" envDefault:"8080"`
+	MoresleepURL          string `env:"MORESLEEP_URL" envDefault:"http://localhost:8082"`
+	MoresleepUser         string `env:"MORESLEEP_USER"`
+	MoresleepPassword     string `env:"MORESLEEP_PASSWORD"`
+	ElasticsearchURL      string `env:"ELASTICSEARCH_URL" envDefault:"http://localhost:9200"`
+	ElasticsearchUser     string `env:"ELASTICSEARCH_USER"`
+	ElasticsearchPassword string `env:"ELASTICSEARCH_PASSWORD"`
+	PrivateIndex          string `env:"PRIVATE_INDEX" envDefault:"javazone_private"`
+	PublicIndex           string `env:"PUBLIC_INDEX" envDefault:"javazone_public"`
 
 	// OIDC Configuration (only used in production mode)
 	OIDCIssuerURL    string `env:"OIDC_ISSUER_URL"`

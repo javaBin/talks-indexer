@@ -56,7 +56,11 @@ func main() {
 	logger.Info("moresleep client initialized")
 
 	// Initialize elasticsearch client
-	esClient, err := elasticsearch.New(cfg.ElasticsearchURL)
+	esClient, err := elasticsearch.New(
+		cfg.ElasticsearchURL,
+		cfg.ElasticsearchUser,
+		cfg.ElasticsearchPassword,
+	)
 	if err != nil {
 		logger.Error("failed to create elasticsearch client", "error", err)
 		os.Exit(1)

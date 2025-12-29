@@ -34,7 +34,7 @@ func TestNew(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 		assert.NotNil(t, client)
 		assert.NotNil(t, client.es)
@@ -42,7 +42,7 @@ func TestNew(t *testing.T) {
 	})
 
 	t.Run("connection failure", func(t *testing.T) {
-		client, err := New("http://invalid-host:9999")
+		client, err := New("http://invalid-host:9999", "", "")
 		assert.Error(t, err)
 		assert.Nil(t, client)
 	})
@@ -54,7 +54,7 @@ func TestNew(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		assert.Error(t, err)
 		assert.Nil(t, client)
 		assert.Contains(t, err.Error(), "elasticsearch connection error")
@@ -75,7 +75,7 @@ func TestClient_CreateIndex(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		err = client.CreateIndex(context.Background(), "test-index", TalkPrivateIndexMapping)
@@ -91,7 +91,7 @@ func TestClient_CreateIndex(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		err = client.CreateIndex(context.Background(), "test-index", "invalid-json")
@@ -112,7 +112,7 @@ func TestClient_DeleteIndex(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		err = client.DeleteIndex(context.Background(), "test-index")
@@ -128,7 +128,7 @@ func TestClient_DeleteIndex(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		err = client.DeleteIndex(context.Background(), "test-index")
@@ -144,7 +144,7 @@ func TestClient_DeleteIndex(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		err = client.DeleteIndex(context.Background(), "test-index")
@@ -162,7 +162,7 @@ func TestClient_IndexExists(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		exists, err := client.IndexExists(context.Background(), "test-index")
@@ -178,7 +178,7 @@ func TestClient_IndexExists(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		exists, err := client.IndexExists(context.Background(), "test-index")
@@ -194,7 +194,7 @@ func TestClient_IndexExists(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		exists, err := client.IndexExists(context.Background(), "test-index")
@@ -240,7 +240,7 @@ func TestClient_BulkIndex(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		talks := createTestTalks(2)
@@ -258,7 +258,7 @@ func TestClient_BulkIndex(t *testing.T) {
 		server := createMockESServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		err = client.BulkIndex(context.Background(), "test-index", []domain.Talk{})
@@ -297,7 +297,7 @@ func TestClient_BulkIndex(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		talks := createTestTalks(2)
@@ -317,7 +317,7 @@ func TestClient_BulkIndex(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		talks := createTestTalks(1)
@@ -346,7 +346,7 @@ func TestClient_BulkIndexFormat(t *testing.T) {
 		}))
 		defer server.Close()
 
-		client, err := New(server.URL)
+		client, err := New(server.URL, "", "")
 		require.NoError(t, err)
 
 		talks := createTestTalks(1)
